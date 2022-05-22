@@ -10,7 +10,7 @@
 <script>
 import { getBanner, getPersonalized, getNewAlbum, getNewsong } from '../api/index'
 import Banner from '../components/Banner'
-import Personalized from './Personalized'
+import Personalized from '../components/Personalized'
 import SongList from '../components/SongList'
 
 export default {

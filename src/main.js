@@ -4,6 +4,11 @@ import router from './router'
 import store from './store'
 import fastclick from 'fastclick'
 import './assets/css/base.scss'
+import VueLazyload from 'vue-lazyload'
+Vue.use(VueLazyload, {
+  // 设置占位图片
+  loading: require('./assets/images/loading.png')
+})
 
 fastclick.attach(document.body)
 Vue.config.productionTip = false
