@@ -1,18 +1,26 @@
 <template>
 <div class="recommend">
-  热门推荐
+  <Banner :banners="banners"></Banner>
 </div>
 </template>
 
 <script>
 import { getBanner } from '../api/index'
-
+import Banner from '../components/Banner'
 export default {
   name: 'Recommend',
+  components: {
+    Banner
+  },
+  data () {
+    return {
+      banners: []
+    }
+  },
   created () {
     getBanner()
-      .then(function (data) {
-        console.log(data)
+      .then((data) => {
+        this.banners = data.banners
       })
       .catch(function (err) {
         console.log(err)
