@@ -54,6 +54,14 @@ export default {
     第一个参数：告诉观察者对象我们需要观察谁
     第二个参数：告诉观察者对象我们需要观察什么内容
     * */
+  },
+  methods: {
+    // 提供一个监听滚动距离的方法给外界使用
+    scrolling (fn) {
+      this.iscroll.on('scroll', function () {
+        fn(this.y)
+      })
+    }
   }
 }
 </script>
