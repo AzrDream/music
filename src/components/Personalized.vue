@@ -17,8 +17,7 @@ export default {
   name: 'Personalized',
   methods: {
     selectItem (id) {
-      // console.log(id)
-      this.$emit('select', id)
+      this.$emit('select', id, this.type)
     }
   },
   props: {
@@ -28,6 +27,11 @@ export default {
       required: true
     },
     title: {
+      type: String,
+      default: () => '',
+      required: true
+    },
+    type: {
       type: String,
       default: () => '',
       required: true
