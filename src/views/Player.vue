@@ -1,15 +1,18 @@
 <template>
     <div class="player">
       <PlayerHeader></PlayerHeader>
+      <PlayerMiddle></PlayerMiddle>
     </div>
 </template>
 
 <script>
 import PlayerHeader from '../components/Player/PlayerHeader'
+import PlayerMiddle from '../components/Player/PlayerMiddle'
 export default {
   name: 'Player',
   components: {
-    PlayerHeader
+    PlayerHeader,
+    PlayerMiddle
   }
 }
 </script>
