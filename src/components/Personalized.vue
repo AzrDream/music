@@ -4,7 +4,7 @@
         <h3>{{title}}</h3>
       </div>
       <div class="personalized-list">
-        <div class="item" v-for="value in personalized" :key="value.id">
+        <div class="item" v-for="value in personalized" :key="value.id" @click="selectItem(value.id)">
           <img v-lazy="value.picUrl" alt="">
           <p>{{value.name}}</p>
         </div>
@@ -15,6 +15,12 @@
 <script>
 export default {
   name: 'Personalized',
+  methods: {
+    selectItem (id) {
+      // console.log(id)
+      this.$emit('select', id)
+    }
+  },
   props: {
     personalized: {
       type: Array,
