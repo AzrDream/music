@@ -57,8 +57,9 @@ export default {
     const defaultHeight = this.$refs.top.$el.offsetHeight
     this.$refs.scrollview.scrolling((offsetY) => {
       if (offsetY < 0) {
-        const scale = 10 * Math.abs(offsetY) / defaultHeight
-        this.$refs.top.$el.style.filter = `blur(${scale}px)`
+        // const scale = 10 * Math.abs(offsetY) / defaultHeight
+        const scale = Math.abs(offsetY) / defaultHeight
+        this.$refs.top.changeMask(scale)
       } else {
         const scale = 1 + offsetY / defaultHeight
         this.$refs.top.$el.style.transform = `scale(${scale})`
