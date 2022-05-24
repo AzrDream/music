@@ -1,5 +1,5 @@
 <template>
-    <div class="list-player">
+    <div class="list-player" v-show="isShow">
       <div class="player-warpper">
         <div class="player-top">
           <div class="top-left">
@@ -27,7 +27,7 @@
           </ScrollView>
         </div>
         <div class="player-bottom">
-          <p>关闭</p>
+          <p @click.stop="hidden">关闭</p>
         </div>
       </div>
     </div>
@@ -39,6 +39,19 @@ export default {
   name: 'ListPlayer',
   components: {
     ScrollView
+  },
+  methods: {
+    show () {
+      this.isShow = true
+    },
+    hidden () {
+      this.isShow = false
+    }
+  },
+  data () {
+    return {
+      isShow: false
+    }
   }
 }
 </script>
