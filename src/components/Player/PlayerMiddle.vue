@@ -111,18 +111,23 @@ export default {
       width: 500px;
       height: 500px;
       border-radius: 50%;
-      border-bottom: 30px solid #fff;
+      border: 30px solid #fff;
       overflow: hidden;
+      animation: sport 3s linear infinite;
+      animation-play-state: paused;
+      &.active{
+        animation-play-state: running;
+      }
       img{
         width: 100%;
         height: 100%;
       }
     }
     p{
-      margin-top: 50px;
       text-align: center;
       @include font_size($font_medium);
       @include font_color();
+      margin-top: 50px;
     }
   }
   .lyric{
