@@ -1,32 +1,19 @@
 <template>
     <div class="player">
-      <PlayerHeader></PlayerHeader>
-      <PlayerMiddle></PlayerMiddle>
-      <PlayerBottom></PlayerBottom>
+      <NormalPlayer></NormalPlayer>
     </div>
 </template>
 
 <script>
-import PlayerHeader from '../components/Player/PlayerHeader'
-import PlayerMiddle from '../components/Player/PlayerMiddle'
-import PlayerBottom from '../components/Player/PlayerBottom'
+import NormalPlayer from '../components/Player/NormalPlayer'
 export default {
   name: 'Player',
   components: {
-    PlayerHeader,
-    PlayerMiddle,
-    PlayerBottom
+    NormalPlayer
   }
 }
 </script>
 
 <style scoped lang="scss">
-.player{
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: pink;
-}
+
 </style>
