@@ -1,5 +1,5 @@
 <template>
-    <div class="normal-player">
+    <div class="normal-player" v-show="this.$store.state.isFullScreen">
       <div class="player-warpper">
         <PlayerHeader></PlayerHeader>
         <PlayerMiddle></PlayerMiddle>
