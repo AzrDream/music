@@ -1,4 +1,4 @@
-import { SET_FULL_SCREEN, SET_MINI_PLAYER, SET_IS_PLAYING } from '@/store/mutations-type'
+import { SET_FULL_SCREEN, SET_MINI_PLAYER, SET_IS_PLAYING, SET_MODE_TYPE } from '@/store/mutations-type'
 
 export default {
   setFullScreen ({ commit }, flag) {
@@ -9,5 +9,8 @@ export default {
   },
   setIsPlaying ({ commit }, flag) {
     commit(SET_IS_PLAYING, flag)
+  },
+  setModeType ({ commit }, flag) {
+    commit(SET_MODE_TYPE, flag)
   }
 }
