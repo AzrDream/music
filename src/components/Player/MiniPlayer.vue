@@ -13,7 +13,7 @@
           </div>
         </div>
         <div class="player-right">
-          <div class="play"></div>
+          <div class="play" @click="play" ref="play"></div>
           <div class="list" @click.stop="showList"></div>
         </div>
       </div>
@@ -30,7 +30,8 @@ export default {
   methods: {
     ...mapActions([
       'setFullScreen',
-      'setMiniPlayer'
+      'setMiniPlayer',
+      'setIsPlaying'
     ]),
     showList () {
       this.$emit('showList')
@@ -48,12 +49,25 @@ export default {
       Velocity(el, 'transition.bounceDownOut', { duration: 500 }, function () {
         done()
       })
+    },
+    play () {
+      this.setIsPlaying(!this.isPlaying)
     }
   },
   computed: {
     ...mapGetters([
-      'isShowMiniPlayer'
+      'isShowMiniPlayer',
+      'isPlaying'
     ])
+  },
+  watch: {
+    isPlaying (newValue, oldValue) {
+      if (newValue) {
+        this.$refs.play.classList.add('active')
+      } else {
+        this.$refs.play.classList.remove('active')
+      }
+    }
   }
 }
 </script>
@@ -104,7 +118,10 @@ export default {
       .play{
         width: 84px;
         height: 84px;
-        @include bg_img('../../assets/images/play')
+        @include bg_img('../../assets/images/pause');
+        &.active{
+          @include bg_img('../../assets/images/play');
+        }
       }
       .list{
         width: 120px;
