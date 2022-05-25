@@ -30,9 +30,9 @@ export default {
     const obj = parseLyric(result.lrc.lyric)
     commit(SET_SONG_LYRIC, obj)
   },
-  async setSongDetail ({ commit }, ids) {
-    const result = await getSongDetail({ ids: ids })
-    const urls = await getSongURL({ id: ids })
+  async setSongDetail  ({ commit }, ids) {
+    const result = await getSongDetail({ ids: ids.join(',') })
+    const urls = await getSongURL({ id: ids.join(',') })
     const list = []
     result.songs.forEach(function (value, i) {
       const obj = {}

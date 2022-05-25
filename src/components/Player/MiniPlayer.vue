@@ -6,10 +6,10 @@
     <div class="mini-player" v-show="this.isShowMiniPlayer">
       <div class="player-warpper">
         <div class="player-left" @click="showNormalPlayer">
-          <img src="https://t14.baidu.com/it/u=2932247180,118236842&fm=179&app=42&size=w931&n=0&f=JPEG&fmt=auto?s=BFA8782356E072BCBF81BC870100E0E1&sec=1653411600&t=a17b37f2ec816232ea5a24a2d8358236" ref="cd">
+          <img :src="currentSong.picUrl" ref="cd">
           <div class="player-title">
-            <h3>演员</h3>
-            <p>薛之谦</p>
+            <h3>{{currentSong.name}}</h3>
+            <p>{{currentSong.singer}}</p>
           </div>
         </div>
         <div class="player-right">
@@ -58,7 +58,8 @@ export default {
   computed: {
     ...mapGetters([
       'isShowMiniPlayer',
-      'isPlaying'
+      'isPlaying',
+      'currentSong'
     ])
   },
   watch: {
@@ -108,7 +109,7 @@ export default {
       .player-title{
         display: flex;
         flex-direction: column;
-        align-items: center;
+        /*align-items: center;*/
         justify-content: center;
         h3{
           @include font_size($font_medium);

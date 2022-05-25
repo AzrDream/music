@@ -2,7 +2,7 @@
     <ul class="detail-bottom">
       <li class="bottom-top">
         <div class="bottom-icon"></div>
-        <div class="bottom-title">播放全部</div>
+        <div class="bottom-title" @click="selectAllMusic">播放全部</div>
       </li>
       <li v-for="value in playlist" :key="value.id" class="item" @click="selectMusic(value.id)">
         <h3>{{value.name}}</h3>
@@ -29,7 +29,14 @@ export default {
     ]),
     selectMusic (id) {
       this.setFullScreen(true)
-      this.setSongDetail(id)
+      this.setSongDetail([id])
+    },
+    selectAllMusic () {
+      this.setFullScreen(true)
+      const ids = this.playlist.map(function (item) {
+        return item.id
+      })
+      this.setSongDetail(ids)
     }
   }
 }
