@@ -2,7 +2,7 @@
   <swiper :options="swiperOption" class="banner">
     <swiper-slide class="cd">
       <div class="cd-warpper" ref="cdWarpper">
-        <img src="https://t14.baidu.com/it/u=2932247180,118236842&fm=179&app=42&size=w931&n=0&f=JPEG&fmt=auto?s=BFA8782356E072BCBF81BC870100E0E1&sec=1653411600&t=a17b37f2ec816232ea5a24a2d8358236" alt="">
+        <img :src="currentSong.picUrl" alt="">
       </div>
       <p>说话的方式简单点</p>
     </swiper-slide>
@@ -95,7 +95,8 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'isPlaying'
+      'isPlaying',
+      'currentSong'
     ])
   },
   watch: {
