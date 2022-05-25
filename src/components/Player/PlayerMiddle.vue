@@ -1,7 +1,7 @@
 <template>
   <swiper :options="swiperOption" class="banner">
     <swiper-slide class="cd">
-      <div class="cd-warpper">
+      <div class="cd-warpper" ref="cdWarpper">
         <img src="https://t14.baidu.com/it/u=2932247180,118236842&fm=179&app=42&size=w931&n=0&f=JPEG&fmt=auto?s=BFA8782356E072BCBF81BC870100E0E1&sec=1653411600&t=a17b37f2ec816232ea5a24a2d8358236" alt="">
       </div>
       <p>说话的方式简单点</p>
@@ -70,6 +70,7 @@
 import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import ScrollView from '../ScrollView'
+import { mapGetters } from 'vuex'
 export default {
   name: 'PlayerMiddle',
   components: {
@@ -89,6 +90,20 @@ export default {
         observer: true,
         observeParents: true,
         observeSlideChildren: true
+      }
+    }
+  },
+  computed: {
+    ...mapGetters([
+      'isPlaying'
+    ])
+  },
+  watch: {
+    isPlaying (newValue, oldValue) {
+      if (newValue) {
+        this.$refs.cdWarpper.classList.add('active')
+      } else {
+        this.$refs.cdWarpper.classList.remove('active')
       }
     }
   }
@@ -143,6 +158,14 @@ export default {
         color: #fff;
       }
     }
+  }
+}
+@keyframes sport {
+  from{
+    transform: rotate(0deg);
+  }
+  to{
+    transform: rotate(360deg);
   }
 }
 </style>
