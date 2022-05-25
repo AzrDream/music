@@ -20,7 +20,7 @@
 import PlayerHeader from './PlayerHeader'
 import PlayerMiddle from './PlayerMiddle'
 import PlayerBottom from './PlayerBottom'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import Velocity from 'velocity-animate'
 import 'velocity-animate/velocity.ui'
 export default {
@@ -37,6 +37,9 @@ export default {
     ])
   },
   methods: {
+    ...mapActions([
+      'getSongLyric'
+    ]),
     enter (el, done) {
       Velocity(el, 'transition.shrinkIn', { duration: 500 }, function () {
         done()
@@ -46,6 +49,14 @@ export default {
       Velocity(el, 'transition.shrinkOut', { duration: 500 }, function () {
         done()
       })
+    }
+  },
+  watch: {
+    currentSong (newValue, oldValue) {
+      if (newValue.id === undefined) {
+        return
+      }
+      this.getSongLyric(newValue.id)
     }
   }
 }
