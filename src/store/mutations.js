@@ -5,15 +5,24 @@ import {
   SET_MODE_TYPE,
   SET_LIST_PLAYER,
   SET_SONG_DETAIL,
-  SET_SONG_LYRIC
+  SET_SONG_LYRIC,
+  SET_DEL_SONG
 } from '@/store/mutations-type'
 
 export default {
   [SET_FULL_SCREEN] (state, flag) {
     state.isFullScreen = flag
+    if (flag) {
+      state.isShowMiniPlayer = false
+      state.isShowListPlayer = false
+    }
   },
   [SET_MINI_PLAYER] (state, flag) {
     state.isShowMiniPlayer = flag
+    if (flag) {
+      state.isFullScreen = false
+      state.isShowListPlayer = false
+    }
   },
   [SET_LIST_PLAYER] (state, flag) {
     state.isShowListPlayer = flag
@@ -29,5 +38,20 @@ export default {
   },
   [SET_SONG_LYRIC] (state, lyric) {
     state.currentLyric = lyric
+  },
+  [SET_DEL_SONG] (state, index) {
+    if (index !== undefined) {
+      state.songs.splice(index, 1)
+    } else {
+      state.songs = []
+    }
+    if (index < state.currentIndex) {
+      state.currentIndex = state.currentIndex - 1
+    }
+    if (state.songs.length === 0) {
+      state.isFullScreen = false
+      state.isShowMiniPlayer = false
+      state.isShowListPlayer = false
+    }
   }
 }

@@ -5,7 +5,8 @@ import {
   SET_MODE_TYPE,
   SET_LIST_PLAYER,
   SET_SONG_DETAIL,
-  SET_SONG_LYRIC
+  SET_SONG_LYRIC,
+  SET_DEL_SONG
 } from '@/store/mutations-type'
 import { getSongDetail, getSongLyric, getSongURL } from '@/api'
 
@@ -59,6 +60,9 @@ export default {
       list.push(obj)
     })
     commit(SET_SONG_DETAIL, list)
+  },
+  setDelSong ({ commit }, index) {
+    commit(SET_DEL_SONG, index)
   }
 }
 

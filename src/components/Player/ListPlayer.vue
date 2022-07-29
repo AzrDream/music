@@ -13,20 +13,20 @@
             <p v-else>随机播放</p>
           </div>
           <div class="top-right">
-            <div class="del"></div>
+            <div class="del" @click="detAll"></div>
           </div>
         </div>
         <div class="player-middle">
           <ScrollView ref="scrollView">
             <ul>
-              <li class="item" v-for="value in songs" :key="value.id">
+              <li class="item" v-for="(value, index) in songs" :key="value.id">
                 <div class="item-left">
                   <div class="item-play" @click="play" ref="play"></div>
                   <p>{{value.name}}</p>
                 </div>
                 <div class="item-right">
                   <div class="item-favorite"></div>
-                  <div class="item-del"></div>
+                  <div class="item-del" @click="del(index)"></div>
                 </div>
               </li>
             </ul>
@@ -55,7 +55,8 @@ export default {
     ...mapActions([
       'setIsPlaying',
       'setModeType',
-      'setListPlayer'
+      'setListPlayer',
+      'setDelSong'
     ]),
     hidden () {
       this.setListPlayer(false)
@@ -81,6 +82,12 @@ export default {
       } else if (this.modeType === modeType.random) {
         this.setModeType(modeType.loop)
       }
+    },
+    del (index) {
+      this.setDelSong(index)
+    },
+    detAll () {
+      this.setDelSong()
     }
   },
   computed: {
