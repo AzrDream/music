@@ -1,13 +1,13 @@
 <template>
     <div class="play-bottom">
       <div class="bottom-process">
-        <span>00:00</span>
+        <span ref="eleCurrentTime">00:00</span>
         <div class="progress-bar">
           <div class="progress-line">
             <div class="progress-dot"></div>
           </div>
         </div>
-        <span>00:00</span>
+        <span ref="eletotalTime">00:00</span>
       </div>
       <div class="bottom-controll">
         <div class="mode loop" @click="mode" ref="mode"></div>
@@ -47,6 +47,28 @@ export default {
       } else if (this.modeType === modeType.random) {
         this.setModeType(modeType.loop)
       }
+    },
+    formatTime (time) {
+      // 2.得到两个时间之间的差值(秒)
+      const differSecond = time
+      // 3.利用相差的总秒数 / 每一天的秒数 = 相差的天数
+      let day = Math.floor(differSecond / (60 * 60 * 24))
+      day = day >= 10 ? day : '0' + day
+      // 4.利用相差的总秒数 / 小时 % 24;
+      let hour = Math.floor(differSecond / (60 * 60) % 24)
+      hour = hour >= 10 ? hour : '0' + hour
+      // 5.利用相差的总秒数 / 分钟 % 60;
+      let minute = Math.floor(differSecond / 60 % 60)
+      minute = minute >= 10 ? minute : '0' + minute
+      // 6.利用相差的总秒数 % 秒数
+      let second = Math.floor(differSecond % 60)
+      second = second >= 10 ? second : '0' + second
+      return {
+        day: day,
+        hour: hour,
+        minute: minute,
+        second: second
+      }
     }
   },
   computed: {
@@ -75,6 +97,26 @@ export default {
         this.$refs.mode.classList.remove('one')
         this.$refs.mode.classList.add('random')
       }
+    },
+    totalTime (newValue, oldValue) {
+      const time = this.formatTime(newValue)
+      this.$refs.eletotalTime.innerHTML = time.minute + ':' + time.second
+    },
+    currentTime (newValue, oldValue) {
+      const time = this.formatTime(newValue)
+      this.$refs.eleCurrentTime.innerHTML = time.minute + ':' + time.second
+    }
+  },
+  props: {
+    totalTime: {
+      type: Number,
+      default: 0,
+      required: true
+    },
+    currentTime: {
+      type: Number,
+      default: 0,
+      required: true
     }
   }
 }
