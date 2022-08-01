@@ -4,8 +4,8 @@ import axios from 'axios'
 // axios.defaults.baseURL = 'http://music.eleuu.com'
 // axios.defaults.baseURL = 'http://music.cyrilstudio.top'
 // axios.defaults.baseURL = 'http://127.0.0.1:3000'
-// axios.defaults.baseURL = 'http://124.223.89.194:3000'
-axios.defaults.baseURL = 'http://www.codeman.ink/api'
+axios.defaults.baseURL = 'http://124.223.89.194:3000'
+// axios.defaults.baseURL = 'http://www.codeman.ink/api'
 axios.defaults.timeout = 3000
 
 // 封装自己的get/post方法

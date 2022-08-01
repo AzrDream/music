@@ -1,4 +1,5 @@
 module.exports = {
+  publicPath: '/music',
   configureWebpack: {
     module: {
       rules: [
