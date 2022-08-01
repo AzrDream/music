@@ -15,7 +15,7 @@
 <script>
 import ScrollView from '../ScrollView'
 import SongListItem from '../SongListItem'
-import { mapGetters, mapActions, mapMutations } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'AccountBottom',
   components: {
@@ -38,20 +38,21 @@ export default {
   methods: {
     ...mapActions([
       'setFullScreen',
-      'setSongDetail',
-      'setCurrentIndex'
-    ]),
-    ...mapMutations([
-      'SET_SONG_DETAIL'
+      'setSongDetail'
     ]),
     selectAllMusic () {
-      if (this.switchNum === 0) {
-        this.SET_SONG_DETAIL(this.favoriteList)
-      } else {
-        this.SET_SONG_DETAIL(this.historyList)
-      }
       this.setFullScreen(true)
-      this.setCurrentIndex(0)
+      let ids = []
+      if (this.switchNum === 0) {
+        ids = this.favoriteList.map(item => {
+          return item.id
+        })
+      } else {
+        ids = this.historyList.map(item => {
+          return item.id
+        })
+      }
+      this.setSongDetail(ids)
     }
   }
 }
