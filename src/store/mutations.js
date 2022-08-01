@@ -6,7 +6,8 @@ import {
   SET_LIST_PLAYER,
   SET_SONG_DETAIL,
   SET_SONG_LYRIC,
-  SET_DEL_SONG
+  SET_DEL_SONG,
+  SET_CURRENT_INDEX
 } from '@/store/mutations-type'
 
 export default {
@@ -53,5 +54,13 @@ export default {
       state.isShowMiniPlayer = false
       state.isShowListPlayer = false
     }
+  },
+  [SET_CURRENT_INDEX] (state, index) {
+    if (index < 0) {
+      index = state.songs.length - 1
+    } else if (index > state.songs.length - 1) {
+      index = 0
+    }
+    state.currentIndex = index
   }
 }

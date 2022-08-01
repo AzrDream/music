@@ -6,7 +6,8 @@ import {
   SET_LIST_PLAYER,
   SET_SONG_DETAIL,
   SET_SONG_LYRIC,
-  SET_DEL_SONG
+  SET_DEL_SONG,
+  SET_CURRENT_INDEX
 } from '@/store/mutations-type'
 import { getSongDetail, getSongLyric, getSongURL } from '@/api'
 
@@ -63,6 +64,9 @@ export default {
   },
   setDelSong ({ commit }, index) {
     commit(SET_DEL_SONG, index)
+  },
+  setCurrentIndex ({ commit }, index) {
+    commit(SET_CURRENT_INDEX, index)
   }
 }
 
