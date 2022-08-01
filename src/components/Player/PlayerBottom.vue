@@ -2,7 +2,7 @@
     <div class="play-bottom">
       <div class="bottom-process">
         <span ref="eleCurrentTime">00:00</span>
-        <div class="progress-bar" @click="progressClick">
+        <div class="progress-bar" @click="progressClick" ref="progressBar">
           <div class="progress-line" ref="progressLine">
             <div class="progress-dot"></div>
           </div>
@@ -51,10 +51,10 @@ export default {
     },
     progressClick (e) {
       // 1.计算进度条的位置
-      const normalLeft = e.target.offsetLeft
+      const normalLeft = this.$refs.progressBar.offsetLeft
       const eventLeft = e.pageX
       const clickLeft = eventLeft - normalLeft
-      const progressWidth = e.target.offsetWidth
+      const progressWidth = this.$refs.progressBar.offsetWidth
       const value = clickLeft / progressWidth
       this.$refs.progressLine.style.width = value * 100 + '%'
       // 2.计算当前应该从什么地方开始播放

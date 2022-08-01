@@ -63,15 +63,20 @@ export default {
     currentTime (newValue, oldValue) {
       // 1.高亮歌词同步
       const lineNum = Math.floor(newValue) + ''
-      const result = this.currentLyric[lineNum]
-      if (result !== undefined && result !== '') {
-        this.currentLineNum = lineNum
-        // 2.歌词滚动同步
-        const currentLyricTop = document.querySelector('li.active').offsetTop
-        const lyricHeight = this.$refs.lyric.$el.offsetHeight
-        if (currentLyricTop > lyricHeight / 2) {
-          this.$refs.scrollView.scrollTo(0, lyricHeight / 2 - currentLyricTop, 100)
-        }
+      this.currentLineNum = this.getActiveLineNum(lineNum)
+      // 2.歌词滚动同步
+      const currentLyricTop = document.querySelector('li.active').offsetTop
+      const lyricHeight = this.$refs.lyric.$el.offsetHeight
+      if (currentLyricTop > lyricHeight / 2) {
+        this.$refs.scrollView.scrollTo(0, lyricHeight / 2 - currentLyricTop, 100)
+      } else {
+        this.$refs.scrollView.scrollTo(0, 0, 100)
+      }
+    },
+    currentLyric (newValue, oldValue) {
+      for (const key in newValue) {
+        this.currentLineNum = key
+        return
       }
     }
   },
