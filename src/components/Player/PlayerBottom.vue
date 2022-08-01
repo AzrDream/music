@@ -2,8 +2,8 @@
     <div class="play-bottom">
       <div class="bottom-process">
         <span ref="eleCurrentTime">00:00</span>
-        <div class="progress-bar">
-          <div class="progress-line">
+        <div class="progress-bar" @click="progressClick">
+          <div class="progress-line" ref="progressLine">
             <div class="progress-dot"></div>
           </div>
         </div>
@@ -28,7 +28,8 @@ export default {
     ...mapActions([
       'setIsPlaying',
       'setModeType',
-      'setCurrentIndex'
+      'setCurrentIndex',
+      'setCurrentTime'
     ]),
     play () {
       this.setIsPlaying(!this.isPlaying)
@@ -47,6 +48,18 @@ export default {
       } else if (this.modeType === modeType.random) {
         this.setModeType(modeType.loop)
       }
+    },
+    progressClick (e) {
+      // 1.计算进度条的位置
+      const normalLeft = e.target.offsetLeft
+      const eventLeft = e.pageX
+      const clickLeft = eventLeft - normalLeft
+      const progressWidth = e.target.offsetWidth
+      const value = clickLeft / progressWidth
+      this.$refs.progressLine.style.width = value * 100 + '%'
+      // 2.计算当前应该从什么地方开始播放
+      const currentTime = this.totalTime * value
+      this.setCurrentTime(currentTime)
     },
     formatTime (time) {
       // 2.得到两个时间之间的差值(秒)
@@ -103,8 +116,12 @@ export default {
       this.$refs.eletotalTime.innerHTML = time.minute + ':' + time.second
     },
     currentTime (newValue, oldValue) {
+      // 1.格式化当前播放的时间
       const time = this.formatTime(newValue)
       this.$refs.eleCurrentTime.innerHTML = time.minute + ':' + time.second
+      // 2.根据当前播放的时间计算比例
+      const value = newValue / this.totalTime * 100
+      this.$refs.progressLine.style.width = value + '%'
     }
   },
   props: {
@@ -146,7 +163,7 @@ export default {
       height: 10px;
       background: #fff;
       .progress-line{
-        width: 50%;
+        width: 0;
         height: 100%;
         background: #ccc;
         position: relative;
