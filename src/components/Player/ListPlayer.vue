@@ -25,7 +25,7 @@
                   <p>{{value.name}}</p>
                 </div>
                 <div class="item-right">
-                  <div class="item-favorite"></div>
+                  <div class="item-favorite" @click.stop="favorite(value)" :class="{'active': isFavorite(value)}"></div>
                   <div class="item-del" @click.stop="del(index)"></div>
                 </div>
               </li>
@@ -57,7 +57,8 @@ export default {
       'setModeType',
       'setListPlayer',
       'setDelSong',
-      'setCurrentIndex'
+      'setCurrentIndex',
+      'setFavoriteSong'
     ]),
     hidden () {
       this.setListPlayer(false)
@@ -92,6 +93,15 @@ export default {
     },
     selectMusic (index) {
       this.setCurrentIndex(index)
+    },
+    favorite (value) {
+      this.setFavoriteSong(value)
+    },
+    isFavorite (song) {
+      const result = this.favoriteList.find(currentValue => {
+        return currentValue.id === song.id
+      })
+      return result !== undefined
     }
   },
   computed: {
@@ -100,7 +110,8 @@ export default {
       'modeType',
       'isShowListPlayer',
       'songs',
-      'currentIndex'
+      'currentIndex',
+      'favoriteList'
     ])
   },
   watch: {
