@@ -73,7 +73,7 @@ export default {
   },
   [SET_FAVORITE_SONG] (state, song) {
     const result = state.favoriteList.find(currentValue => {
-      return currentValue === song
+      return currentValue.id === song.id
     })
     if (!result) {
       state.favoriteList.push(song)
@@ -84,7 +84,7 @@ export default {
   },
   [SET_HISTORY_SONG] (state, song) {
     const result = state.historyList.find(currentValue => {
-      return currentValue === song
+      return currentValue.id === song.id
     })
     if (!result) {
       if (state.historyList.length > 30) {

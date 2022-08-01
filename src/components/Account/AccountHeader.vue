@@ -25,6 +25,7 @@ export default {
     },
     switchItem (num) {
       this.switchNum = num
+      this.$emit('switchItem', num)
     }
   }
 }
