@@ -10,7 +10,9 @@ import {
   SET_CURRENT_INDEX,
   SET_CURRENT_TIME,
   SET_FAVORITE_SONG,
-  SET_FAVORITE_LIST
+  SET_FAVORITE_LIST,
+  SET_HISTORY_SONG,
+  SET_HISTORY_LIST
 } from '@/store/mutations-type'
 
 export default {
@@ -79,5 +81,19 @@ export default {
   },
   [SET_FAVORITE_LIST] (state, list) {
     state.favoriteList = list
+  },
+  [SET_HISTORY_SONG] (state, song) {
+    const result = state.historyList.find(currentValue => {
+      return currentValue === song
+    })
+    if (!result) {
+      if (state.historyList.length > 30) {
+        state.historyList.splice(0, 1)
+      }
+      state.historyList.push(song)
+    }
+  },
+  [SET_HISTORY_LIST] (state, list) {
+    state.historyList = list
   }
 }
