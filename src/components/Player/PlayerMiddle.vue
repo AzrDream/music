@@ -59,6 +59,13 @@ export default {
       } else {
         this.$refs.cdWarpper.classList.remove('active')
       }
+    },
+    currentTime (newValue, oldValue) {
+      const lineNum = Math.floor(newValue) + ''
+      const result = this.currentLyric[lineNum]
+      if (result !== undefined && result !== '') {
+        this.currentLineNum = lineNum
+      }
     }
   },
   methods: {
@@ -81,6 +88,13 @@ export default {
       } else {
         return lineNum + ''
       }
+    }
+  },
+  props: {
+    currentTime: {
+      type: Number,
+      default: 0,
+      required: true
     }
   }
 }
