@@ -78,6 +78,16 @@ export default {
       this.searchHistory.push(this.keywords)
       setLocalStorage('searchHistory', this.searchHistory)
       this.keywords = ''
+    },
+    selectedHot (name) {
+      this.keywords = name
+      this.search()
+    },
+    delHistory (name) {
+      this.searchHistory = this.searchHistory.filter(function (item) {
+        return item !== name
+      })
+      setLocalStorage('searchHistory', this.searchHistory)
     }
   },
   directives: {
