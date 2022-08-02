@@ -15,9 +15,11 @@ import DetailHeader from '../components/Detail/DetailHeader'
 import DetailTop from '../components/Detail/DetailTop'
 import DetailBottom from '../components/Detail/DetailBottom'
 import ScrollView from '../components/ScrollView'
+import MetaInfo from '../../vue-meta-info'
 import { getPlayList, getAlbum, getArtistsSongs, getTopList } from '../api/index'
 export default {
   name: 'Detail',
+  metaInfo: MetaInfo.detail,
   components: {
     DetailHeader,
     DetailTop,
