@@ -5,8 +5,19 @@
 </template>
 
 <script>
+import { getTopListDetail } from '../api'
+
 export default {
-  name: 'Rank'
+  name: 'Rank',
+  created () {
+    getTopListDetail()
+      .then(data => {
+        console.log(data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
 }
 </script>
 
