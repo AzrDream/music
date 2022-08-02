@@ -6,7 +6,7 @@
        <li class="list-group" v-for="(value, index) in list" :key="index" ref="group">
          <h2 class="group-title">{{keys[index]}}</h2>
          <ul>
-           <li class="group-item" v-for="obj in list[index]" :key="obj.id">
+           <li class="group-item" v-for="obj in list[index]" :key="obj.id" @click.stop="switchSinger(obj.id)">
              <img v-lazy="obj.img1v1Url" alt="">
              <p>{{obj.name}}</p>
            </li>
@@ -28,6 +28,9 @@
      {{fixTitle}}
    </div>
  </div>
+  <transition>
+    <router-view></router-view>
+  </transition>
 </div>
 </template>
 
@@ -60,6 +63,9 @@ export default {
         index = this.keys.length - 1
       }
       this._keyDown(index)
+    },
+    switchSinger (id) {
+      this.$router.push(`/singer/detail/${id}/singer`)
     }
   },
   computed: {

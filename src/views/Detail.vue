@@ -15,7 +15,7 @@ import DetailHeader from '../components/Detail/DetailHeader'
 import DetailTop from '../components/Detail/DetailTop'
 import DetailBottom from '../components/Detail/DetailBottom'
 import ScrollView from '../components/ScrollView'
-import { getPlayList, getAlbum } from '../api/index'
+import { getPlayList, getAlbum, getArtistsSongs } from '../api/index'
 export default {
   name: 'Detail',
   components: {
@@ -46,6 +46,18 @@ export default {
             name: data.album.name,
             coverImgUrl: data.album.picUrl,
             tracks: data.songs
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    } else if (this.$route.params.type === 'singer') {
+      getArtistsSongs({ id: this.$route.params.id })
+        .then((data) => {
+          this.playlist = {
+            name: data.artist.name,
+            coverImgUrl: data.artist.picUrl,
+            tracks: data.hotSongs
           }
         })
         .catch((err) => {
