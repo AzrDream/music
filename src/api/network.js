@@ -34,5 +34,16 @@ export default {
           reject(error)
         })
     })
+  },
+  all: function (list) {
+    return new Promise(function (resolve, reject) {
+      axios.all(list)
+        .then(axios.spread(function (...result) {
+          resolve(result)
+        }))
+        .catch(function (err) {
+          reject(err)
+        })
+    })
   }
 }
