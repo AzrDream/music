@@ -10,6 +10,9 @@
 
 http://www.azrdream.com/music
 
+## 相关笔记可以在下方查看（需要翻墙）  -->前端学习-->Vue核心+项目实战-->Vue网易云音乐项目
+
+[OneNote笔记](https://1drv.ms/u/s!AsRmC2wcOgkJgXkLnjhnEKVvR9x1)
 
 #### 注意
 
