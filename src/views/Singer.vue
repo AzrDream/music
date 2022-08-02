@@ -17,6 +17,7 @@
    <ul class="list-keys">
      <li v-for="(key,index) in keys"
          :key="key"
+         :data-index="index"
          @touchstart.stop.prevent="touchstart"
          @touchmove.stop.prevent="touchmove"
          :class="{'active':currentIndex === index}">
@@ -134,6 +135,11 @@ export default {
         this.$refs.group.forEach(group => {
           this.groupsTop.push(group.offsetTop)
         })
+      })
+    },
+    fixTitle () {
+      this.$nextTick(() => {
+        this.fixTitleHeight = this.$refs.fixTitle.offsetHeight
       })
     }
   }
