@@ -1,21 +1,23 @@
 <template>
-    <div class="header">
-      <div class="header-left" @click.stop="back"></div>
-      <ul class="header-title">
-        <li :class="{'active' : switchNum === 0}" @click.stop="switchItem(0)">我喜欢的</li>
-        <li :class="{'active' : switchNum === 1}" @click.stop="switchItem(1)">最近听的</li>
-      </ul>
-      <div class="header-right"></div>
-    </div>
+  <Header class="header">
+    <div slot="left" class="header-left" @click.stop="back"></div>
+    <ul slot="center" class="header-title">
+      <li :class="{'active' : switchNum === 0}" @click.stop="switchItem(0)">我喜欢的</li>
+      <li :class="{'active' : switchNum === 1}" @click.stop="switchItem(1)">最近听的</li>
+    </ul>
+    <div slot="right" class="header-right"></div>
+  </Header>
 </template>
 
 <script>
+import Header from '../Header'
 export default {
   name: 'AccountHeader',
+  components: {
+    Header
+  },
   data () {
     return {
-      themes: ['theme', 'theme1', 'theme2'],
-      index: 0,
       switchNum: 0
     }
   },
@@ -35,32 +37,21 @@ export default {
   @import "../../assets/css/variable";
   @import "../../assets/css/mixin";
   .header{
-    width: 100%;
-    height: 100px;
-    @include bg_color();
-    display: flex;
-    justify-content: space-between;
-    position: relative;
-    z-index: 999;
-    .header-left,.header-right{
-      width: 84px;
-      height: 84px;
-      margin-top: 8px;
-    }
     .header-left{
-      @include bg_img('../../assets/images/back');
+      @include bg_img("../../assets/images/back");
     }
     .header-right{
-      @include bg_img('../../assets/images/more');
+      @include bg_img("../../assets/images/more");
     }
-    .header-title {
+    .header-title{
       display: flex;
       justify-content: center;
       align-items: center;
-      color: #fff;
-      font-weight: bold;
       border: 1px solid #fff;
       border-radius: 10px;
+      box-sizing: border-box;
+      color: #FFFFFF;
+      font-weight: bold;
       @include font_size($font_medium);
       @include no-wrap();
       height: 60px;
