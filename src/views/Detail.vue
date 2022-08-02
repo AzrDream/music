@@ -15,7 +15,7 @@ import DetailHeader from '../components/Detail/DetailHeader'
 import DetailTop from '../components/Detail/DetailTop'
 import DetailBottom from '../components/Detail/DetailBottom'
 import ScrollView from '../components/ScrollView'
-import { getPlayList, getAlbum, getArtistsSongs } from '../api/index'
+import { getPlayList, getAlbum, getArtistsSongs, getTopList } from '../api/index'
 export default {
   name: 'Detail',
   components: {
@@ -32,35 +32,42 @@ export default {
   created () {
     if (this.$route.params.type === 'personalized') {
       getPlayList({ id: this.$route.params.id })
-        .then((data) => {
+        .then(data => {
           this.playlist = data.playlist
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err)
         })
     } else if (this.$route.params.type === 'album') {
       getAlbum({ id: this.$route.params.id })
-        .then((data) => {
-          // console.log(data)
+        .then(data => {
           this.playlist = {
             name: data.album.name,
             coverImgUrl: data.album.picUrl,
             tracks: data.songs
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err)
         })
     } else if (this.$route.params.type === 'singer') {
       getArtistsSongs({ id: this.$route.params.id })
-        .then((data) => {
+        .then(data => {
           this.playlist = {
             name: data.artist.name,
             coverImgUrl: data.artist.picUrl,
             tracks: data.hotSongs
           }
         })
-        .catch((err) => {
+        .catch(err => {
+          console.log(err)
+        })
+    } else if (this.$route.params.type === 'rank') {
+      getTopList({ id: this.$route.params.id })
+        .then(data => {
+          this.playlist = data.playlist
+        })
+        .catch(err => {
           console.log(err)
         })
     }
